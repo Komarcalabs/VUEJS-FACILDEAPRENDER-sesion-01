@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Sesion 1 - Webinar de Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <button
+        @click="mostrarCalculadora = !mostrarCalculadora"
+        class="app-button"
+        title="App2: Calculadora"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          v-if="!mostrarCalculadora"
+        >
+          <path
+            fill="currentColor"
+            d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m0 2v4h10V4zm0 6v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zm-8 4v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zm-8 4v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2z"
+          />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          v-else
+        >
+          <path
+            d="M1.5 4.768L2.777 3.5L21 21.723L19.732 23l-1.458-1.458c-.346.286-.79.458-1.274.458H7a2 2 0 0 1-2-2V8.268l-3.5-3.5zM7 2h10a2 2 0 0 1 2 2v13.177l-2-2V14h-1.177L13 11.177V10h-1.177l-2-2H17V4H7v1.177L5.125 3.302A2 2 0 0 1 7 2zm0 10h1.732L7 10.268V12zm8-2v2h2v-2h-2zm-8 4v2h2v-2H7zm4 2h1.732L11 14.268V16zm-4 2v2h2v-2H7zm4 0v2h2v-2h-2zm4 2h1.732L15 18.268V20z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div v-if="mostrarCalculadora" class="calculadora">
+        <p>Calculadora</p>
+        <input
+          type="number"
+          name=""
+          id=""
+          v-model="number1"
+          style="display: block; margin: 8px 0"
+        />
+        <input
+          type="number"
+          name=""
+          id=""
+          v-model="number2"
+          style="display: block; margin: 8px 0"
+        />
+        <button @click="add">Sumar</button>
+        <p class="resultado">RESULTADO: {{ result }}</p>
+      </div>
+    </div>
+    <div id="app2">
+      <button
+        class="app-button"
+        title="App2: Dinero"
+        @click="mostarApp2 = !mostrarApp2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M3.005 3.003h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-18a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1m1 2v14h16v-14zm6.05 6h4.95v2h-4.95a2.5 2.5 0 0 0 4.064 1.409l1.7 1.134a4.5 4.5 0 0 1-7.787-2.543H7.005v-2h1.027A4.5 4.5 0 0 1 15.82 8.46l-1.701 1.134a2.5 2.5 0 0 0-4.064 1.41"
+          />
+        </svg>
+      </button>
+      <div v-if="mostarApp2">App 2</div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          const number1 = ref(0);
+          const number2 = ref(0);
+          const result = ref(0);
+          const mostrarCalculadora = ref(false);
+
+          function add() {
+            result.value = number1.value + number2.value;
+          }
+          function substract(number1, number2) {}
+
+          return {
+            number1,
+            number2,
+            add,
+            result,
+            mostrarCalculadora,
+          };
+        },
+      }).mount("#app");
+
+      createApp({
+        setup() {
+          const mostarApp2 = ref(false);
+          return {
+            mostarApp2,
+          };
+        },
+      }).mount("#app2");
+    </script>
+    <style>
+      #app,
+      #app2 {
+        margin: 2rem;
+      }
+
+      .app-button {
+        background-color: beige;
+        border: thin solid grey;
+        padding: 4px;
+        border-radius: 10px;
+      }
+
+      .calculadora {
+        display: block;
+        width: 50%;
+        max-height: 200px;
+        margin: 1rem auto;
+        padding: 0.5rem;
+        border: thin solid gray;
+        border-radius: 10px;
+      }
+      .calculadora p {
+        font-weight: bold;
+        color: blue;
+        font-size: 1.2em;
+      }
+      .calculadora .resultado {
+        color: red;
+      }
+    </style>
+  </body>
+</html>
